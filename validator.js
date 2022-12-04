@@ -1,35 +1,28 @@
-// đối tượng 'Valitor'
-function Validator(options) {
-    var formElement = document.querySelector(options.form);
-    if (formElement) {
-        options.rules.forEach(function(rule) {
-            var inputElement = formElement.querySelector(rule.selector);
-            if (inputElement) {
-                inputElement.onblur = function() {
-                    console.log('blur ' + rule.selector);
-                }
+const imgPosition = document.querySelectorAll(".aspect-ratio-169 img")
+const imgContainer = document.querySelector('.aspect-ratio-169')
+const dotItem = document.querySelectorAll('.dot')
+let imgNumber = imgPosition.length
+let index = 0
+imgPosition.forEach(function(image, index) {
+    image.style.left = index * 100 + "%"
+    dotItem[index].addEventListener("click", function() {
+        slider(index)
+    })
+})
 
-            }
-        });
+function imgSlide() {
+    index++;
+    if (index >= imgNumber) {
+        index = 0
+
     }
+    slider(index)
 }
 
-// định nghĩa các rule
-Validator.isEmail = function(selector) {
-    return {
-        selector: selector,
-        test: function() {}
-    };
+function slider(index) {
+    imgContainer.style.left = "-" + index * 100 + "%"
+    const dotActive = document.querySelector('.active')
+    dotActive.classList.remove('active')
+    dotItem[index].classList.add("active")
 }
-Validator.isPassword = function(selector) {
-    return {
-        selector: selector,
-        test: function() {}
-    };
-}
-Validator.isRpassword = function(selector) {
-    return {
-        selector: selector,
-        test: function() {}
-    };
-}
+setInterval(imgSlide, 5000)
