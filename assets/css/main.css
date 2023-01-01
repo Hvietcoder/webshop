@@ -1013,6 +1013,7 @@
         border-top: 4px solid var(--primary-color);
         background-color: #fff;
         color: rgba(0, 0, 0, .54);
+        display: block;
     }
     
     .footer-list {
